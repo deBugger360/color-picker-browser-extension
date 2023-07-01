@@ -4,12 +4,10 @@ colorList = document.querySelector(".all-colors"),
 pickedColors = JSON.parse(localStorage.getItem("picked-colors") || "[]");
 
 // copy the color code to the clipboard and update the element text
-const copyColor = function(element) {
-    element.innerText = "Copied!";
-    navigator.clipboard.writeText(element.dataset.color);
-    setTimeout(function() {
-        element.innerText = element.dataset.color
-    }, 1000);
+const copyColor = function(elem) {
+    elem.innerText = "Copied!";
+    navigator.clipboard.writeText(elem.dataset.color);
+    setTimeout(() => elem.innerText = elem.dataset.color, 1000);
 }
 
 const showColor = function() {
@@ -17,12 +15,11 @@ const showColor = function() {
         return; 
     }//returning (exit) if there is no picked colors
 
-    colorList.innerHTML = pickedColors.map(function(color) {
+    colorList.innerHTML = pickedColors.map(color => 
         `<li class="color">
-            <span class="rect" style="background: ${color}; border: 1px solid ${color == "#fffff" ? "#cccccc": color}"></span>
+            <span class="rect" style="background: ${color}; border: 1px solid ${color == "#ffffff" ? "#cccccc": color}"></span>
             <span class="value hex" data-color="${color}">${color}</span>
-        </li>`
-    }).join(""); // Generating li for the picked color and adding it to the colorList
+        </li>`).join(""); // Generating li for the picked color and adding it to the colorList
     document.querySelector(".picked-colors").classList.remove("hide");
 
     // add click event listener to each color element to copy the color code
